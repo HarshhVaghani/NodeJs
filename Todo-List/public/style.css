@@ -1,4 +1,3 @@
-/* ------------------ RESET ------------------ */
 * {
   margin: 0;
   padding: 0;
@@ -6,7 +5,6 @@
   font-family: "Inter", system-ui, -apple-system, sans-serif;
 }
 
-/* ------------------ PAGE ------------------ */
 body {
   min-height: 100vh;
   background: linear-gradient(135deg, #00555a, #ffca4b);
@@ -15,7 +13,6 @@ body {
   justify-content: center;
 }
 
-/* ------------------ APP CARD ------------------ */
 .app {
   width: 80%;
   max-width: 500px;
@@ -26,7 +23,6 @@ body {
   animation: fadeIn 0.4s ease;
 }
 
-/* ------------------ HEADER ------------------ */
 .header {
   display: flex;
   justify-content: space-between;
@@ -45,7 +41,6 @@ body {
   color: #777;
 }
 
-/* ------------------ ADD TASK ------------------ */
 .add-task {
   display: flex;
   gap: 10px;
@@ -84,7 +79,6 @@ body {
   transform: scale(1.05);
 }
 
-/* ------------------ TASK LIST ------------------ */
 .task-list {
   list-style: none;
   max-height: 320px;
@@ -92,7 +86,6 @@ body {
   padding-right: 4px;
 }
 
-/* ------------------ TASK ITEM ------------------ */
 .task {
   display: flex;
   align-items: center;
@@ -109,7 +102,6 @@ body {
   box-shadow: 0 10px 22px rgba(0, 0, 0, 0.12);
 }
 
-/* ------------------ EDIT FORM ------------------ */
 .edit-form {
   flex: 1;
   display: flex;
@@ -148,7 +140,6 @@ body {
   transform: scale(1.1);
 }
 
-/* ------------------ DELETE BUTTON ------------------ */
 .delete {
   border: none;
   background: #ffe5e5;
@@ -165,7 +156,6 @@ body {
   transform: scale(1.15);
 }
 
-/* ------------------ EMPTY STATE ------------------ */
 .empty {
   text-align: center;
   color: #888;
@@ -173,7 +163,6 @@ body {
   margin-top: 28px;
 }
 
-/* ------------------ ANIMATION ------------------ */
 @keyframes fadeIn {
   from {
     opacity: 0;

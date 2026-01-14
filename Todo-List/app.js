@@ -8,10 +8,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 app.set("view engine", "ejs");
 
-// In-memory storage
 let todos = [];
 
-// Home route
+// route
 app.get("/", (req, res) => {
   res.render("index", { todos });
 });
@@ -43,7 +42,6 @@ app.post("/delete/:index", (req, res) => {
   res.redirect("/");
 });
 
-// Server
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });

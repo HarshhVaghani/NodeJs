@@ -1,0 +1,188 @@
+/* ------------------ RESET ------------------ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+}
+
+/* ------------------ PAGE ------------------ */
+body {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #00555a, #ffca4b);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ------------------ APP CARD ------------------ */
+.app {
+  width: 80%;
+  max-width: 500px;
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 22px;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.25);
+  animation: fadeIn 0.4s ease;
+}
+
+/* ------------------ HEADER ------------------ */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.header h1 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #00555a;
+}
+
+.header p {
+  font-size: 0.85rem;
+  color: #777;
+}
+
+/* ------------------ ADD TASK ------------------ */
+.add-task {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.add-task input {
+  flex: 1;
+  padding: 12px 14px;
+  font-size: 0.95rem;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+}
+
+.add-task input:focus {
+  outline: none;
+  border-color: #00555a;
+  box-shadow: 0 0 0 3px rgba(0, 85, 90, 0.15);
+}
+
+.add-task .btn {
+  padding: 10px 16px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-radius: 12px;
+  border: none;
+  background: #00555a;
+  color: white;
+  cursor: pointer;
+  white-space: nowrap; /* prevents wrapping */
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.add-task .btn:hover {
+  background: #003f42;
+  transform: scale(1.05);
+}
+
+/* ------------------ TASK LIST ------------------ */
+.task-list {
+  list-style: none;
+  max-height: 320px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+/* ------------------ TASK ITEM ------------------ */
+.task {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #f7f7f7;
+  padding: 10px 12px;
+  border-radius: 14px;
+  margin-bottom: 10px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.task:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.12);
+}
+
+/* ------------------ EDIT FORM ------------------ */
+.edit-form {
+  flex: 1;
+  display: flex;
+  gap: 8px;
+}
+
+.edit-form input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-size: 0.95rem;
+  padding: 6px 8px;
+  border-radius: 8px;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+
+.edit-form input:focus {
+  outline: none;
+  background: #ffffff;
+  box-shadow: 0 0 0 2px rgba(0, 85, 90, 0.2);
+}
+
+.edit {
+  border: none;
+  background: #e8f5f5;
+  color: #00555a;
+  border-radius: 10px;
+  padding: 6px 10px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.2s, transform 0.15s;
+}
+
+.edit:hover {
+  background: #d4eeee;
+  transform: scale(1.1);
+}
+
+/* ------------------ DELETE BUTTON ------------------ */
+.delete {
+  border: none;
+  background: #ffe5e5;
+  color: #e63946;
+  border-radius: 10px;
+  padding: 6px 10px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: background 0.2s, transform 0.15s;
+}
+
+.delete:hover {
+  background: #ffd2d2;
+  transform: scale(1.15);
+}
+
+/* ------------------ EMPTY STATE ------------------ */
+.empty {
+  text-align: center;
+  color: #888;
+  font-size: 0.95rem;
+  margin-top: 28px;
+}
+
+/* ------------------ ANIMATION ------------------ */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+

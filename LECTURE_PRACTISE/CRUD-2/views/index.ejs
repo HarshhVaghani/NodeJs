@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1 style="text-align: center;">CRUD using express and Ejs Template</h1>
+  <a href="/add">Add User</a>
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Action</th>
+    </tr>
+      <% users.forEach(user => { %>
+      <% console.log(user) %>
+        <tr>
+          <td><%= user.name %></td>
+          <td><%= user.email %><td>
+          <td>
+            <a href="/edit/<%= user.id %>">Edit</a> <!-- /edit/1 -->
+            <a href="/delete/<%= user.id %>">Delete</a>
+          </td>
+        </tr>
+      <% }) %>
+  </table>
+</body>
+</html>

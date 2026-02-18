@@ -1,0 +1,8 @@
+@import "tailwindcss";
+@import "flowbite/src/themes/default";
+
+@layer components{
+  .heading{
+    @apply bg-blue-500 text-2xl p-4 text-center font-black text-white
+  }
+}

@@ -1,0 +1,27 @@
+<%- include("partials/header") %>
+
+<div class="flex">
+
+<div class="flex-1 p-8">
+    <h1 class="text-3xl font-bold mb-6">Add Blog Post</h1>
+
+    <form action="/add-post" method="POST" class="bg-white p-6 rounded shadow w-1/2">
+        <div class="mb-4">
+            <label class="block mb-1">Title</label>
+            <input type="text" name="title" class="w-full border p-2" required>
+        </div>
+
+        <div class="mb-4">
+            <label class="block mb-1">Content</label>
+            <textarea name="content" class="w-full border p-2" required></textarea>
+        </div>
+
+        <button class="bg-blue-600 text-white px-4 py-2 rounded">
+            Publish Post
+        </button>
+    </form>
+</div>
+
+</div>
+
+<%- include("partials/footer") %>

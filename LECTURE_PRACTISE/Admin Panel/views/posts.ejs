@@ -1,0 +1,32 @@
+<%- include("partials/header") %>
+
+<div class="flex">
+
+<div class="flex-1 p-8">
+    <h1 class="text-3xl font-bold mb-6">All Posts</h1>
+
+    <table class="min-w-full bg-white rounded shadow">
+        <thead class="bg-gray-200">
+            <tr>
+                <th class="py-2 px-4">Title</th>
+                <th class="py-2 px-4">Content</th>
+                <th class="py-2 px-4">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% posts.forEach(post => { %>
+                <tr class="border-t">
+                    <td class="py-2 px-4"><%= post.title %></td>
+                    <td class="py-2 px-4"><%= post.content %></td>
+                    <td class="py-2 px-4">
+                        <a href="/delete/<%= post.id %>" class="text-red-500">Delete</a>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</div>
+
+</div>
+
+<%- include("partials/footer") %>

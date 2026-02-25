@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><%- include('../partials/head') %></head>
+<body class="text-white min-h-screen">
+
+<%- include('../partials/navbar') %>
+<%- include('../partials/flash') %>
+
+<!-- Hero Section -->
+<section class="relative overflow-hidden bg-gradient-to-br from-cinema-700 via-cinema-800 to-cinema-900 py-20">
+  <div class="absolute inset-0 opacity-10">
+    <div class="absolute top-10 left-20 w-72 h-72 bg-yellow-500 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-10 right-20 w-96 h-96 bg-orange-500 rounded-full blur-3xl"></div>
+  </div>
+  <div class="relative max-w-7xl mx-auto px-4 text-center">
+    <h1 class="text-5xl md:text-7xl font-black mb-4">
+      <span class="gradient-text">CINE</span><span class="text-white">VAULT</span>
+    </h1>
+    <p class="text-gray-300 text-xl mb-8 max-w-xl mx-auto">Discover, explore, and enjoy your favorite movies all in one place.</p>
+    
+    <!-- Search Bar -->
+    <form action="/" method="GET" class="max-w-2xl mx-auto">
+      <div class="flex gap-2 glass rounded-2xl p-2">
+        <input type="text" name="search" value="<%= search %>" placeholder="Search movies, directors, cast..."
+          class="flex-1 bg-transparent px-4 py-2 text-white placeholder-gray-400 outline-none text-lg">
+        <input type="hidden" name="genre" value="<%= selectedGenre %>">
+        <button type="submit" class="bg-yellow-500 hover:bg-yellow-400 text-black font-bold px-6 py-2 rounded-xl transition-colors">
+          🔍 Search
+        </button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- Genre Filter -->
+<section class="max-w-7xl mx-auto px-4 py-6">
+  <div class="flex flex-wrap gap-2 justify-center">
+    <a href="/?search=<%= search %>&genre=all" 
+      class="px-4 py-2 rounded-full text-sm font-medium transition-all <%= selectedGenre === 'all' ? 'bg-yellow-500 text-black' : 'glass text-gray-300 hover:border-yellow-500/50' %>">
+      🎬 All
+    </a>
+    <% genres.forEach(g => { %>
+    <a href="/?search=<%= search %>&genre=<%= g %>"
+      class="px-4 py-2 rounded-full text-sm font-medium transition-all <%= selectedGenre === g ? 'bg-yellow-500 text-black' : 'glass text-gray-300 hover:border-yellow-500/50' %>">
+      <%= g %>
+    </a>
+    <% }) %>
+  </div>
+</section>
+
+<!-- Featured Movies (Top Rated) -->
+<% if (!search && selectedGenre === 'all' && featuredMovies.length > 0) { %>
+<section class="max-w-7xl mx-auto px-4 py-4 mb-4">
+  <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">⭐ <span class="gradient-text">Top Rated</span></h2>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <% featuredMovies.forEach((m, i) => { %>
+    <a href="/movie/<%= m._id %>" class="relative glass rounded-2xl overflow-hidden card-hover group">
+      <div class="absolute top-3 left-3 z-10 bg-yellow-500 text-black text-xs font-black px-2 py-1 rounded-full">#<%= i+1 %> TOP</div>
+      <img src="/uploads/<%= m.posterImage %>" alt="<%= m.title %>" 
+        class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500"
+        onerror="this.src='https://via.placeholder.com/400x600/1a1a2e/fbbf24?text=🎬+No+Poster'">
+      <div class="p-4">
+        <h3 class="font-bold text-lg truncate"><%= m.title %></h3>
+        <div class="flex items-center justify-between mt-1">
+          <span class="text-gray-400 text-sm"><%= m.genre %> · <%= m.releaseYear %></span>
+          <span class="star-rating font-bold">⭐ <%= m.rating %>/10</span>
+        </div>
+      </div>
+    </a>
+    <% }) %>
+  </div>
+</section>
+<% } %>
+
+<!-- Movies Grid -->
+<section class="max-w-7xl mx-auto px-4 py-4 pb-12">
+  <div class="flex items-center justify-between mb-6">
+    <h2 class="text-2xl font-bold">
+      <% if (search) { %> 🔍 Results for "<span class="gradient-text"><%= search %></span>"
+      <% } else if (selectedGenre !== 'all') { %> 🎭 <span class="gradient-text"><%= selectedGenre %></span> Movies
+      <% } else { %> 🎬 All <span class="gradient-text">Movies</span>
+      <% } %>
+    </h2>
+    <span class="text-gray-400 text-sm glass px-3 py-1 rounded-full"><%= movies.length %> movies</span>
+  </div>
+
+  <% if (movies.length === 0) { %>
+  <div class="text-center py-20">
+    <div class="text-6xl mb-4">🎬</div>
+    <h3 class="text-2xl font-bold text-gray-400">No movies found</h3>
+    <p class="text-gray-500 mt-2">Try a different search or <a href="/" class="text-yellow-400 hover:underline">browse all movies</a></p>
+  </div>
+  <% } else { %>
+  <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5">
+    <% movies.forEach(movie => { %>
+    <a href="/movie/<%= movie._id %>" class="glass rounded-xl overflow-hidden card-hover group">
+      <div class="relative overflow-hidden">
+        <img src="/uploads/<%= movie.posterImage %>" alt="<%= movie.title %>"
+          class="poster-img w-full group-hover:scale-110 transition-transform duration-500"
+          onerror="this.src='https://via.placeholder.com/300x450/1a1a2e/fbbf24?text=🎬'">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3">
+          <span class="text-yellow-400 text-sm font-semibold">View Details →</span>
+        </div>
+        <div class="absolute top-2 right-2 bg-black/70 rounded-lg px-2 py-0.5 text-xs star-rating font-bold">
+          ⭐ <%= movie.rating %>
+        </div>
+      </div>
+      <div class="p-3">
+        <h3 class="font-bold text-sm truncate"><%= movie.title %></h3>
+        <div class="flex items-center justify-between mt-1">
+          <span class="text-yellow-500/80 text-xs font-medium"><%= movie.genre %></span>
+          <span class="text-gray-500 text-xs"><%= movie.releaseYear %></span>
+        </div>
+      </div>
+    </a>
+    <% }) %>
+  </div>
+  <% } %>
+</section>
+
+<%- include('../partials/footer') %>
+</body>
+</html>

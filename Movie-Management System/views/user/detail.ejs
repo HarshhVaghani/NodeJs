@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><%- include('../partials/head') %></head>
+<body class="text-white min-h-screen">
+
+<%- include('../partials/navbar') %>
+<%- include('../partials/flash') %>
+
+<div class="max-w-6xl mx-auto px-4 py-10">
+  <!-- Back Button -->
+  <a href="/" class="inline-flex items-center gap-2 text-gray-400 hover:text-yellow-400 transition-colors mb-8">
+    ← Back to Movies
+  </a>
+
+  <div class="grid md:grid-cols-3 gap-10">
+    <!-- Poster -->
+    <div class="md:col-span-1">
+      <div class="rounded-2xl overflow-hidden shadow-2xl shadow-yellow-500/10 sticky top-24">
+        <img src="/uploads/<%= movie.posterImage %>" alt="<%= movie.title %>"
+          class="w-full object-cover"
+          onerror="this.src='https://via.placeholder.com/400x600/1a1a2e/fbbf24?text=🎬+No+Poster'">
+      </div>
+    </div>
+
+    <!-- Details -->
+    <div class="md:col-span-2">
+      <div class="flex flex-wrap items-center gap-3 mb-3">
+        <span class="bg-yellow-500/20 text-yellow-400 border border-yellow-500/30 px-3 py-1 rounded-full text-sm font-medium"><%= movie.genre %></span>
+        <span class="bg-cinema-700 px-3 py-1 rounded-full text-sm text-gray-400"><%= movie.language || 'English' %></span>
+        <% if (movie.duration) { %>
+        <span class="bg-cinema-700 px-3 py-1 rounded-full text-sm text-gray-400">⏱ <%= movie.duration %> min</span>
+        <% } %>
+      </div>
+
+      <h1 class="text-4xl md:text-5xl font-black mb-2"><%= movie.title %></h1>
+      
+      <div class="flex items-center gap-4 mb-6">
+        <div class="flex items-center gap-1">
+          <% for(let i = 1; i <= 10; i++) { %>
+            <span class="text-<%= i <= movie.rating ? 'yellow' : 'gray' %>-400 text-sm">★</span>
+          <% } %>
+        </div>
+        <span class="text-3xl font-black gradient-text"><%= movie.rating %><span class="text-gray-500 text-lg font-normal">/10</span></span>
+      </div>
+
+      <div class="grid grid-cols-2 gap-4 glass rounded-2xl p-6 mb-6">
+        <div>
+          <p class="text-gray-500 text-xs uppercase tracking-wider mb-1">Director</p>
+          <p class="font-semibold text-lg"><%= movie.director %></p>
+        </div>
+        <div>
+          <p class="text-gray-500 text-xs uppercase tracking-wider mb-1">Release Year</p>
+          <p class="font-semibold text-lg"><%= movie.releaseYear %></p>
+        </div>
+        <% if (movie.cast) { %>
+        <div class="col-span-2">
+          <p class="text-gray-500 text-xs uppercase tracking-wider mb-1">Cast</p>
+          <p class="font-medium text-gray-300"><%= movie.cast %></p>
+        </div>
+        <% } %>
+      </div>
+
+      <div class="mb-8">
+        <h2 class="text-xl font-bold mb-3 text-yellow-400">Synopsis</h2>
+        <p class="text-gray-300 leading-relaxed text-lg"><%= movie.description %></p>
+      </div>
+
+      <!-- Admin Actions -->
+      <% if (isAdmin) { %>
+      <div class="flex gap-3">
+        <a href="/admin/movies/edit/<%= movie._id %>" class="bg-yellow-500 hover:bg-yellow-400 text-black font-bold px-6 py-2.5 rounded-xl transition-colors">
+          ✏️ Edit Movie
+        </a>
+        <form action="/admin/movies/delete/<%= movie._id %>?_method=DELETE" method="POST" 
+          onsubmit="return confirm('Delete this movie permanently?')">
+          <button type="submit" class="bg-red-600 hover:bg-red-500 text-white font-bold px-6 py-2.5 rounded-xl transition-colors">
+            🗑️ Delete
+          </button>
+        </form>
+      </div>
+      <% } %>
+    </div>
+  </div>
+
+  <!-- Related Movies -->
+  <% if (related.length > 0) { %>
+  <section class="mt-16">
+    <h2 class="text-2xl font-bold mb-6">🎭 More <span class="gradient-text"><%= movie.genre %></span> Movies</h2>
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-5">
+      <% related.forEach(r => { %>
+      <a href="/movie/<%= r._id %>" class="glass rounded-xl overflow-hidden card-hover group">
+        <img src="/uploads/<%= r.posterImage %>" alt="<%= r.title %>"
+          class="poster-img w-full group-hover:scale-110 transition-transform duration-500"
+          onerror="this.src='https://via.placeholder.com/300x450/1a1a2e/fbbf24?text=🎬'">
+        <div class="p-3">
+          <h3 class="font-bold text-sm truncate"><%= r.title %></h3>
+          <div class="flex justify-between mt-1">
+            <span class="text-gray-500 text-xs"><%= r.releaseYear %></span>
+            <span class="text-yellow-400 text-xs">⭐ <%= r.rating %></span>
+          </div>
+        </div>
+      </a>
+      <% }) %>
+    </div>
+  </section>
+  <% } %>
+</div>
+
+<%- include('../partials/footer') %>
+</body>
+</html>

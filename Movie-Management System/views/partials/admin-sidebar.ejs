@@ -1,0 +1,55 @@
+<div class="flex min-h-screen">
+  <!-- Sidebar -->
+  <aside class="w-64 bg-cinema-card border-r border-cinema-border flex-shrink-0">
+    <div class="p-6 border-b border-cinema-border">
+      <a href="/admin/dashboard" class="flex items-center space-x-2">
+        <svg class="w-7 h-7 text-cinema-accent" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h-2z"/>
+        </svg>
+        <span class="text-xl font-bold text-white">Cine<span class="text-cinema-accent">Vault</span></span>
+      </a>
+      <p class="text-xs text-cinema-text mt-1">Admin Panel</p>
+    </div>
+
+    <nav class="p-4 space-y-1">
+      <a href="/admin/dashboard" class="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-cinema-border transition-colors group">
+        <svg class="w-5 h-5 text-cinema-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+        </svg>
+        <span class="text-cinema-text group-hover:text-white">Dashboard</span>
+      </a>
+
+      <a href="/admin/movies" class="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-cinema-border transition-colors group">
+        <svg class="w-5 h-5 text-cinema-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z"/>
+        </svg>
+        <span class="text-cinema-text group-hover:text-white">Manage Movies</span>
+      </a>
+
+      <a href="/admin/movies/add" class="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-cinema-border transition-colors group">
+        <svg class="w-5 h-5 text-cinema-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+        </svg>
+        <span class="text-cinema-text group-hover:text-white">Add Movie</span>
+      </a>
+
+      <div class="border-t border-cinema-border my-4"></div>
+
+      <a href="/" target="_blank" class="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-cinema-border transition-colors group">
+        <svg class="w-5 h-5 text-cinema-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+        </svg>
+        <span class="text-cinema-text group-hover:text-white">View Site</span>
+      </a>
+
+      <a href="/admin/logout" class="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-red-900/30 transition-colors group">
+        <svg class="w-5 h-5 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+        </svg>
+        <span class="text-red-400 group-hover:text-red-300">Logout</span>
+      </a>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="flex-1 overflow-auto">

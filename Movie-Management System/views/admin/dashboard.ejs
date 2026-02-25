@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><%- include('../partials/head') %></head>
+<body class="text-white min-h-screen">
+<%- include('../partials/navbar') %>
+<%- include('../partials/flash') %>
+
+<div class="max-w-7xl mx-auto px-4 py-8">
+  <!-- Header -->
+  <div class="flex items-center justify-between mb-8">
+    <div>
+      <h1 class="text-3xl font-black">Admin <span class="gradient-text">Dashboard</span></h1>
+      <p class="text-gray-400 mt-1">Manage your movie collection</p>
+    </div>
+    <a href="/admin/movies/add" class="bg-yellow-500 hover:bg-yellow-400 text-black font-bold px-6 py-2.5 rounded-xl transition-colors flex items-center gap-2">
+      + Add Movie
+    </a>
+  </div>
+
+  <!-- Stats -->
+  <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-10">
+    <div class="glass rounded-2xl p-6 text-center">
+      <div class="text-5xl font-black gradient-text"><%= totalMovies %></div>
+      <div class="text-gray-400 mt-1 font-medium">Total Movies</div>
+    </div>
+    <div class="glass rounded-2xl p-6 text-center">
+      <div class="text-5xl font-black gradient-text"><%= totalGenres %></div>
+      <div class="text-gray-400 mt-1 font-medium">Genres</div>
+    </div>
+    <div class="glass rounded-2xl p-6 text-center">
+      <div class="text-5xl font-black gradient-text">⭐ <%= avgRating %></div>
+      <div class="text-gray-400 mt-1 font-medium">Avg Rating</div>
+    </div>
+  </div>
+
+  <div class="grid md:grid-cols-2 gap-8">
+    <!-- Recent Movies -->
+    <div class="glass rounded-2xl p-6">
+      <div class="flex justify-between items-center mb-5">
+        <h2 class="text-xl font-bold">Recent Movies</h2>
+        <a href="/admin/movies" class="text-yellow-400 text-sm hover:underline">View All</a>
+      </div>
+      <% if (recentMovies.length === 0) { %>
+        <p class="text-gray-500 text-center py-4">No movies yet. <a href="/admin/movies/add" class="text-yellow-400">Add one!</a></p>
+      <% } %>
+      <div class="space-y-3">
+        <% recentMovies.forEach(m => { %>
+        <div class="flex items-center gap-3 p-3 bg-white/5 rounded-xl hover:bg-white/10 transition-colors">
+          <img src="/uploads/<%= m.posterImage %>" alt="" class="w-12 h-16 object-cover rounded-lg"
+            onerror="this.src='https://via.placeholder.com/60x80/1a1a2e/fbbf24?text=🎬'">
+          <div class="flex-1 min-w-0">
+            <p class="font-semibold truncate"><%= m.title %></p>
+            <p class="text-gray-400 text-xs"><%= m.genre %> · <%= m.releaseYear %></p>
+          </div>
+          <span class="text-yellow-400 text-sm font-bold">⭐ <%= m.rating %></span>
+        </div>
+        <% }) %>
+      </div>
+    </div>
+
+    <!-- Top Rated -->
+    <div class="glass rounded-2xl p-6">
+      <h2 class="text-xl font-bold mb-5">Top Rated</h2>
+      <div class="space-y-3">
+        <% topRated.forEach((m, i) => { %>
+        <div class="flex items-center gap-3 p-3 bg-white/5 rounded-xl">
+          <span class="text-2xl font-black text-gray-600">#<%= i+1 %></span>
+          <div class="flex-1 min-w-0">
+            <p class="font-semibold truncate"><%= m.title %></p>
+            <p class="text-gray-400 text-xs"><%= m.director %> · <%= m.releaseYear %></p>
+          </div>
+          <span class="bg-yellow-500 text-black text-xs font-black px-2 py-1 rounded-lg">⭐ <%= m.rating %></span>
+        </div>
+        <% }) %>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quick Actions -->
+  <div class="mt-8 glass rounded-2xl p-6">
+    <h2 class="text-xl font-bold mb-4">Quick Actions</h2>
+    <div class="flex flex-wrap gap-3">
+      <a href="/admin/movies/add" class="bg-yellow-500 hover:bg-yellow-400 text-black font-bold px-5 py-2.5 rounded-xl transition-colors">+ Add New Movie</a>
+      <a href="/admin/movies" class="glass hover:bg-white/10 text-white font-medium px-5 py-2.5 rounded-xl transition-colors border border-white/20">📋 Manage Movies</a>
+      <a href="/" class="glass hover:bg-white/10 text-white font-medium px-5 py-2.5 rounded-xl transition-colors border border-white/20">🌐 View Site</a>
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>
+</body>
+</html>

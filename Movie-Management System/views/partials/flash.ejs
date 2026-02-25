@@ -1,0 +1,16 @@
+<% if (success_msg && success_msg.length > 0) { %>
+<div class="fixed top-20 right-4 z-50 bg-green-600 text-white px-6 py-3 rounded-xl shadow-2xl flex items-center gap-2 animate-bounce" id="flash-msg">
+  <span>✅</span> <%= success_msg %>
+</div>
+<% } %>
+<% if (error_msg && error_msg.length > 0) { %>
+<div class="fixed top-20 right-4 z-50 bg-red-600 text-white px-6 py-3 rounded-xl shadow-2xl flex items-center gap-2" id="flash-msg">
+  <span>❌</span> <%= error_msg %>
+</div>
+<% } %>
+<script>
+  setTimeout(() => {
+    const msg = document.getElementById('flash-msg');
+    if (msg) msg.style.display = 'none';
+  }, 4000);
+</script>

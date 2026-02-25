@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><%- include('../partials/head') %></head>
+<body class="text-white min-h-screen">
+<%- include('../partials/navbar') %>
+<%- include('../partials/flash') %>
+
+<div class="max-w-7xl mx-auto px-4 py-8">
+  <div class="flex flex-wrap items-center justify-between gap-4 mb-8">
+    <div>
+      <h1 class="text-3xl font-black">Manage <span class="gradient-text">Movies</span></h1>
+      <p class="text-gray-400 mt-1"><%= movies.length %> movies in database</p>
+    </div>
+    <a href="/admin/movies/add" class="bg-yellow-500 hover:bg-yellow-400 text-black font-bold px-6 py-2.5 rounded-xl transition-colors">
+      + Add New Movie
+    </a>
+  </div>
+
+  <!-- Search -->
+  <form action="/admin/movies" method="GET" class="mb-6">
+    <div class="flex gap-2 glass rounded-xl p-2 max-w-md">
+      <input type="text" name="search" value="<%= search %>" placeholder="Search movies..."
+        class="flex-1 bg-transparent px-3 py-2 text-white placeholder-gray-500 outline-none">
+      <button class="bg-yellow-500 hover:bg-yellow-400 text-black font-bold px-4 py-2 rounded-lg text-sm">Search</button>
+    </div>
+  </form>
+
+  <!-- Movies Table -->
+  <div class="glass rounded-2xl overflow-hidden">
+    <div class="overflow-x-auto">
+      <table class="w-full">
+        <thead class="bg-white/5 border-b border-white/10">
+          <tr>
+            <th class="text-left px-6 py-4 text-gray-400 font-medium text-sm">Movie</th>
+            <th class="text-left px-6 py-4 text-gray-400 font-medium text-sm">Genre</th>
+            <th class="text-left px-6 py-4 text-gray-400 font-medium text-sm">Year</th>
+            <th class="text-left px-6 py-4 text-gray-400 font-medium text-sm">Rating</th>
+            <th class="text-left px-6 py-4 text-gray-400 font-medium text-sm">Director</th>
+            <th class="text-right px-6 py-4 text-gray-400 font-medium text-sm">Actions</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-white/5">
+          <% if (movies.length === 0) { %>
+          <tr>
+            <td colspan="6" class="text-center py-12 text-gray-500">
+              No movies found. <a href="/admin/movies/add" class="text-yellow-400 hover:underline">Add one!</a>
+            </td>
+          </tr>
+          <% } %>
+          <% movies.forEach(movie => { %>
+          <tr class="hover:bg-white/5 transition-colors">
+            <td class="px-6 py-4">
+              <div class="flex items-center gap-3">
+                <img src="/uploads/<%= movie.posterImage %>" alt="" class="w-10 h-14 object-cover rounded-lg"
+                  onerror="this.src='https://via.placeholder.com/40x56/1a1a2e/fbbf24?text=🎬'">
+                <div>
+                  <p class="font-semibold"><%= movie.title %></p>
+                  <p class="text-gray-500 text-xs"><%= movie.language || 'English' %></p>
+                </div>
+              </div>
+            </td>
+            <td class="px-6 py-4">
+              <span class="bg-yellow-500/20 text-yellow-400 border border-yellow-500/30 px-2 py-0.5 rounded-full text-xs"><%= movie.genre %></span>
+            </td>
+            <td class="px-6 py-4 text-gray-300"><%= movie.releaseYear %></td>
+            <td class="px-6 py-4">
+              <span class="star-rating font-bold text-sm">⭐ <%= movie.rating %></span>
+            </td>
+            <td class="px-6 py-4 text-gray-300 text-sm"><%= movie.director %></td>
+            <td class="px-6 py-4">
+              <div class="flex justify-end gap-2">
+                <a href="/movie/<%= movie._id %>" class="text-gray-400 hover:text-white text-sm px-3 py-1.5 glass rounded-lg transition-colors">View</a>
+                <a href="/admin/movies/edit/<%= movie._id %>" class="text-yellow-400 hover:text-yellow-300 text-sm px-3 py-1.5 glass rounded-lg transition-colors">Edit</a>
+                <form action="/admin/movies/delete/<%= movie._id %>?_method=DELETE" method="POST"
+                  onsubmit="return confirm('Delete \'<%= movie.title %>\'?')">
+                  <button type="submit" class="text-red-400 hover:text-red-300 text-sm px-3 py-1.5 glass rounded-lg transition-colors">Delete</button>
+                </form>
+              </div>
+            </td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>
+</body>
+</html>

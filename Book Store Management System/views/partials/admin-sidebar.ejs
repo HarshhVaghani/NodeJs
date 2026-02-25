@@ -1,0 +1,49 @@
+<div class="bg-gray-900 text-white w-64 min-h-screen flex flex-col fixed left-0 top-0 z-40">
+  <!-- Logo -->
+  <div class="p-6 border-b border-gray-700">
+    <a href="/" class="flex items-center gap-2">
+      <i class="fas fa-book-open text-amber-400 text-2xl"></i>
+      <span class="text-xl font-bold">Book<span class="text-amber-400">Store</span></span>
+    </a>
+    <p class="text-gray-400 text-xs mt-1">Management System</p>
+  </div>
+
+  <!-- Admin Info -->
+  <div class="p-4 border-b border-gray-700">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 bg-amber-500 rounded-full flex items-center justify-center">
+        <i class="fas fa-user text-white"></i>
+      </div>
+      <div>
+        <p class="text-sm font-semibold"><%= currentUser.username %></p>
+        <p class="text-xs text-amber-400">Administrator</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Nav Links -->
+  <nav class="flex-1 p-4 space-y-1">
+    <a href="/admin/dashboard"
+      class="flex items-center gap-3 px-4 py-3 rounded-lg text-sm transition-colors hover:bg-gray-800
+        <%= typeof activePage !== 'undefined' && activePage === 'dashboard' ? 'sidebar-active text-amber-400' : 'text-gray-300' %>">
+      <i class="fas fa-tachometer-alt w-5"></i> Dashboard
+    </a>
+    <a href="/admin/books"
+      class="flex items-center gap-3 px-4 py-3 rounded-lg text-sm transition-colors hover:bg-gray-800
+        <%= typeof activePage !== 'undefined' && activePage === 'books' ? 'sidebar-active text-amber-400' : 'text-gray-300' %>">
+      <i class="fas fa-books w-5"></i> All Books
+    </a>
+    <a href="/admin/books/add"
+      class="flex items-center gap-3 px-4 py-3 rounded-lg text-sm transition-colors hover:bg-gray-800
+        <%= typeof activePage !== 'undefined' && activePage === 'add' ? 'sidebar-active text-amber-400' : 'text-gray-300' %>">
+      <i class="fas fa-plus-circle w-5"></i> Add Book
+    </a>
+    <div class="border-t border-gray-700 my-3"></div>
+    <a href="/" class="flex items-center gap-3 px-4 py-3 rounded-lg text-sm text-gray-300 hover:bg-gray-800 transition-colors">
+      <i class="fas fa-store w-5"></i> View Store
+    </a>
+    <a href="/auth/logout" class="flex items-center gap-3 px-4 py-3 rounded-lg text-sm text-red-400 hover:bg-red-900/20 transition-colors">
+      <i class="fas fa-sign-out-alt w-5"></i> Logout
+    </a>
+  </nav>
+</div>

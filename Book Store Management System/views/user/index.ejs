@@ -1,0 +1,104 @@
+<%- include('../partials/header', { title: 'Browse Books' }) %>
+<%- include('../partials/navbar') %>
+
+<!-- Hero Section -->
+<section class="gradient-hero text-white py-20">
+  <div class="max-w-7xl mx-auto px-4 text-center">
+    <h1 class="text-5xl font-bold mb-4">
+      Discover Your Next <span class="text-amber-400">Great Read</span>
+    </h1>
+    <p class="text-gray-300 text-xl mb-8 max-w-2xl mx-auto">
+      Explore thousands of books across every genre. From timeless classics to modern bestsellers.
+    </p>
+    <!-- Mobile Search -->
+    <form action="/" method="GET" class="flex max-w-lg mx-auto md:hidden">
+      <input type="text" name="search" value="<%= search %>" placeholder="Search books..."
+        class="flex-1 px-4 py-3 rounded-l-lg bg-gray-800 text-white placeholder-gray-400 border border-gray-600 focus:outline-none focus:border-amber-400"/>
+      <button type="submit" class="bg-amber-500 hover:bg-amber-600 px-6 py-3 rounded-r-lg transition-colors">
+        <i class="fas fa-search"></i>
+      </button>
+    </form>
+  </div>
+</section>
+
+<!-- Main Content -->
+<div class="max-w-7xl mx-auto px-4 py-10">
+  <!-- Filter Bar -->
+  <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-8">
+    <div>
+      <h2 class="text-2xl font-bold text-gray-800">
+        <% if (search) { %>
+          Search: "<%= search %>"
+        <% } else if (selectedCategory !== 'all') { %>
+          <%= selectedCategory %> Books
+        <% } else { %>
+          All Books
+        <% } %>
+        <span class="text-gray-500 text-base font-normal ml-2">(<%= books.length %> books)</span>
+      </h2>
+    </div>
+
+    <!-- Category Filter -->
+    <div class="flex flex-wrap gap-2">
+      <a href="/" class="px-3 py-1.5 rounded-full text-sm font-medium transition-colors
+        <%= selectedCategory === 'all' ? 'bg-amber-500 text-white' : 'bg-gray-200 text-gray-700 hover:bg-amber-100' %>">
+        All
+      </a>
+      <% categories.forEach(cat => { %>
+        <a href="/?category=<%= cat %>" class="px-3 py-1.5 rounded-full text-sm font-medium transition-colors
+          <%= selectedCategory === cat ? 'bg-amber-500 text-white' : 'bg-gray-200 text-gray-700 hover:bg-amber-100' %>">
+          <%= cat %>
+        </a>
+      <% }) %>
+    </div>
+  </div>
+
+  <!-- Books Grid -->
+  <% if (books.length === 0) { %>
+    <div class="text-center py-20">
+      <i class="fas fa-book-open text-6xl text-gray-300 mb-4"></i>
+      <h3 class="text-xl font-semibold text-gray-600 mb-2">No books found</h3>
+      <p class="text-gray-400">Try a different search term or category.</p>
+      <a href="/" class="mt-4 inline-block bg-amber-500 hover:bg-amber-600 text-white px-6 py-2 rounded-lg transition-colors">
+        View All Books
+      </a>
+    </div>
+  <% } else { %>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+      <% books.forEach(book => { %>
+        <a href="/book/<%= book._id %>" class="book-card bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl group">
+          <div class="relative overflow-hidden h-52 bg-gray-100">
+            <img
+              src="<%= book.image === 'default-book.jpg' ? '/images/default-book.jpg' : '/uploads/' + book.image %>"
+              alt="<%= book.title %>"
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              onerror="this.src='https://via.placeholder.com/300x400/f3f4f6/9ca3af?text=No+Image'"
+            />
+            <div class="absolute top-2 right-2">
+              <span class="bg-amber-500 text-white text-xs px-2 py-1 rounded-full font-medium">
+                <%= book.category %>
+              </span>
+            </div>
+          </div>
+          <div class="p-4">
+            <h3 class="font-bold text-gray-800 text-sm leading-tight mb-1 line-clamp-2 group-hover:text-amber-600 transition-colors">
+              <%= book.title %>
+            </h3>
+            <p class="text-gray-500 text-xs mb-3">by <%= book.author %></p>
+            <div class="flex items-center justify-between">
+              <span class="text-amber-600 font-bold text-lg">₹<%= book.price %></span>
+              <% if (book.rating > 0) { %>
+                <div class="flex items-center gap-1">
+                  <i class="fas fa-star text-amber-400 text-xs"></i>
+                  <span class="text-xs text-gray-600"><%= book.rating %>/5</span>
+                </div>
+              <% } %>
+            </div>
+          </div>
+        </a>
+      <% }) %>
+    </div>
+  <% } %>
+</div>
+
+<%- include('../partials/footer') %>

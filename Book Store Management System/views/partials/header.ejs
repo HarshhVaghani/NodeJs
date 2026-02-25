@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= typeof title !== 'undefined' ? title : 'BookStore' %> | BookStore</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: { 50:'#fef3c7', 100:'#fde68a', 500:'#f59e0b', 600:'#d97706', 700:'#b45309', 800:'#92400e', 900:'#78350f' },
+            dark: { 800:'#1e1b18', 900:'#0f0e0c' }
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <style>
+    .book-card:hover { transform: translateY(-6px); }
+    .book-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .gradient-hero { background: linear-gradient(135deg, #1e1b18 0%, #2d2520 50%, #3d2c1e 100%); }
+    .sidebar-active { background: rgba(245,158,11,0.2); border-left: 3px solid #f59e0b; }
+  </style>
+</head>
+<body class="bg-gray-50 font-sans">

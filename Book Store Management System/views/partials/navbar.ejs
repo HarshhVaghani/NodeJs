@@ -1,0 +1,66 @@
+<nav class="bg-gray-900 shadow-lg sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="flex items-center justify-between h-16">
+      <!-- Logo -->
+      <a href="/" class="flex items-center gap-2">
+        <i class="fas fa-book-open text-amber-400 text-2xl"></i>
+        <span class="text-white text-xl font-bold">Book<span class="text-amber-400">Store</span></span>
+      </a>
+
+      <!-- Search Bar -->
+      <form action="/" method="GET" class="hidden md:flex flex-1 max-w-md mx-8">
+        <div class="relative w-full">
+          <input type="text" name="search" value="<%= typeof search !== 'undefined' ? search : '' %>"
+            placeholder="Search books, authors..."
+            class="w-full pl-4 pr-10 py-2 rounded-lg bg-gray-800 text-white placeholder-gray-400 border border-gray-700 focus:outline-none focus:border-amber-400 text-sm"/>
+          <button type="submit" class="absolute right-3 top-2.5 text-gray-400 hover:text-amber-400">
+            <i class="fas fa-search text-sm"></i>
+          </button>
+        </div>
+      </form>
+
+      <!-- Nav Links -->
+      <div class="flex items-center gap-4">
+        <a href="/" class="text-gray-300 hover:text-amber-400 text-sm transition-colors">
+          <i class="fas fa-home mr-1"></i>Home
+        </a>
+        <% if (currentUser) { %>
+          <a href="/admin/dashboard" class="text-gray-300 hover:text-amber-400 text-sm transition-colors">
+            <i class="fas fa-tachometer-alt mr-1"></i>Dashboard
+          </a>
+          <a href="/auth/logout" class="bg-red-600 hover:bg-red-700 text-white text-sm px-4 py-2 rounded-lg transition-colors">
+            <i class="fas fa-sign-out-alt mr-1"></i>Logout
+          </a>
+        <% } else { %>
+          <a href="/auth/login" class="bg-amber-500 hover:bg-amber-600 text-white text-sm px-4 py-2 rounded-lg transition-colors">
+            <i class="fas fa-lock mr-1"></i>Admin
+          </a>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- Flash Messages -->
+<% if (success && success.length > 0) { %>
+  <div id="flash-success" class="fixed top-20 right-4 z-50 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg flex items-center gap-2 max-w-sm">
+    <i class="fas fa-check-circle"></i>
+    <span><%= success %></span>
+    <button onclick="document.getElementById('flash-success').remove()" class="ml-2 text-white/80 hover:text-white"><i class="fas fa-times"></i></button>
+  </div>
+<% } %>
+<% if (error && error.length > 0) { %>
+  <div id="flash-error" class="fixed top-20 right-4 z-50 bg-red-500 text-white px-6 py-3 rounded-lg shadow-lg flex items-center gap-2 max-w-sm">
+    <i class="fas fa-exclamation-circle"></i>
+    <span><%= error %></span>
+    <button onclick="document.getElementById('flash-error').remove()" class="ml-2 text-white/80 hover:text-white"><i class="fas fa-times"></i></button>
+  </div>
+<% } %>
+
+<script>
+  // Auto-remove flash messages after 4s
+  setTimeout(() => {
+    document.getElementById('flash-success')?.remove();
+    document.getElementById('flash-error')?.remove();
+  }, 4000);
+</script>
